@@ -21,7 +21,7 @@ body {
 
 /*---bannar---- */
 #banner {
-  background: url(header_image.jpg) no-repeat center center/cover;
+  background: url(./img/header_image.jpg) no-repeat center center/cover;
   height: 400px;
   color: #fff;
   text-align: center;
@@ -228,12 +228,14 @@ h2 {
     margin-top: -110px;
     margin-left: 30px;
   }
-
+ 
   .search {
     width: 50%;
     margin-top: -500px;
   }
-
+   #searchInput{
+    margin-top: 140px;
+   }
   h2 {
     font-size: 26px;
   }
