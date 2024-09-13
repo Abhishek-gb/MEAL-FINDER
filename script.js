@@ -16,16 +16,14 @@ fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
 //---- Search---- 
 document.getElementById('searchButton').addEventListener('click', function () {
   const searchInput = document.getElementById('searchInput').value.toLowerCase();
-  const categories = document.querySelectorAll('.col-sm-2.mb-3');
+  fetchMeals(searchInput); 
+  scrollToMeals();
+});
 
-  categories.forEach(category => {
-    const categoryName = category.querySelector('span#top').textContent.toLowerCase();
-    if (categoryName.includes(searchInput)) {
-      category.style.display = 'block';
-    } else {
-      category.style.display = 'none';
-    }
-  });
+document.getElementById('searchInput').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    document.getElementById('searchButton').click();
+  }
 });
 //----navbar-----
 document.querySelectorAll('.nav-link').forEach(link => {
@@ -36,11 +34,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
     link.classList.add('active');
     scrollToMeals();
   });
-});
-document.getElementById('searchInput').addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    document.getElementById('searchButton').click();
-  }
 });
 
 // ---- meals ----------
@@ -103,6 +96,7 @@ mealCategories.forEach(item => {
 function scrollToMeals() {
   const mealsContainer = document.getElementById('img21');
   mealsContainer.scrollIntoView({ behavior: 'smooth' });
+
 }
 
 // --- ID------
@@ -167,5 +161,5 @@ function addMealToDOM(meal) {
         </ul>
       </div>
     `;
-   imgContainer.scrollIntoView({ behavior: 'smooth' });
+    imgContainer.scrollIntoView({ behavior: 'smooth' });
 }
