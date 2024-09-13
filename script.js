@@ -167,4 +167,5 @@ function addMealToDOM(meal) {
         </ul>
       </div>
     `;
+   imgContainer.scrollIntoView({ behavior: 'smooth' });
 }
