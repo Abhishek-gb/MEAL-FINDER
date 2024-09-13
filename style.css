@@ -21,7 +21,7 @@ body {
 
 /*---bannar---- */
 #banner {
-  background: url(./img/header_image.jpg) no-repeat center center/cover;
+  background: url(header_image.jpg) no-repeat center center/cover;
   height: 400px;
   color: #fff;
   text-align: center;
