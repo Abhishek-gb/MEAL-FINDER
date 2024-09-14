@@ -26,6 +26,7 @@ document.getElementById('searchInput').addEventListener('keypress', function (e)
   }
 });
 //----navbar-----
+// ----navbar----- 
 document.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', () => {
     const category = link.getAttribute('data-category');
@@ -41,10 +42,11 @@ function fetchMeals(query, isCategory = false) {
   const url = isCategory
     ? `https://www.themealdb.com/api/json/v1/1/filter.php?c=${query}`
     : `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`;
+  
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      const imgContainer = document.getElementById('img21');
+      const imgContainer = document.getElementById('img21'); 
       const meals = data.meals;
       imgContainer.innerHTML = '';
       if (meals) {
@@ -59,14 +61,25 @@ function fetchMeals(query, isCategory = false) {
           imgContainer.appendChild(mealDiv);
         });
       } else {
-        imgContainer.innerHTML = '<p>No meals found.</p>';
+        imgContainer.innerHTML = '<p  style="color:#f04d24;  font-size: 20px;font-weight: bolder;">No meals found..!</p>';
       }
+
+      scrollToMeals(); 
     })
     .catch(error => console.error('Error fetching the meal data:', error));
 }
 
 
-// ---- Fetch and display meals-----
+function scrollToMeals() {
+  const mealsContainer = document.getElementById('img21'); 
+  const categorySection = document.querySelector('.category-section'); 
+  mealsContainer.scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    categorySection.scrollIntoView({ behavior: 'smooth' });
+  }, 1000);  
+}
+
+// ---category---
 const mealCategories = [
   { id: 'img1', query: 'Beef' },
   { id: 'img2', query: 'Chicken' },
@@ -83,12 +96,12 @@ const mealCategories = [
   { id: 'img13', query: 'Breakfast', isCategory: true },
   { id: 'img14', query: 'Goat', isCategory: true }
 ];
+
 mealCategories.forEach(item => {
   const button = document.getElementById(item.id);
   if (button) {
     button.addEventListener('click', () => {
       fetchMeals(item.query, item.isCategory);
-      scrollToMeals();
     });
   }
 });
@@ -96,8 +109,15 @@ mealCategories.forEach(item => {
 function scrollToMeals() {
   const mealsContainer = document.getElementById('img21');
   mealsContainer.scrollIntoView({ behavior: 'smooth' });
-
 }
+document.querySelector('.fa-house').addEventListener('click', loadHomePage);
+function loadHomePage() {
+  const imgContainer = document.getElementById('img21');
+  const categorySection = document.querySelector('.category-section'); 
+  imgContainer.innerHTML = '';
+  categorySection.scrollIntoView({ behavior: 'smooth' });
+}
+
 
 // --- ID------
 function getMealByID(id) {
@@ -106,7 +126,7 @@ function getMealByID(id) {
     .then(data => {
       const meal = data.meals ? data.meals[0] : null;
       if (!meal) {
-        document.querySelector('.box1').innerHTML = '<p>No meal found.</p>';
+        document.querySelector('.box1').innerHTML = '<p style="color:#f04d24;  font-size: 20px;font-weight: bolder;"">No meal found.</p>';
         return;
       }
       addMealToDOM(meal);
@@ -163,3 +183,4 @@ function addMealToDOM(meal) {
     `;
     imgContainer.scrollIntoView({ behavior: 'smooth' });
 }
+
